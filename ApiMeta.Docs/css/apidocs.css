@@ -1,0 +1,140 @@
+﻿body {
+}
+
+.content {
+    padding-right: 10px;
+}
+
+    .content code {
+            white-space: normal;
+        }
+
+    .content h2{
+        font-size: 1.6em;
+        margin: 0;
+        padding: 0;
+    }
+
+    .content h3 {
+        font-size: 1.3em;
+    }
+
+    .content table {
+        width: 100%;
+    }
+
+    .content section {
+        margin: 0 0 3em 0;    
+        border-radius: 4px;
+        margin: 15px 0 0 0;
+        padding: 10px 0 0 0;
+    }
+
+    .content section:first-child {
+        margin: 0;
+    }
+
+
+.request {
+    padding-bottom: 1em;
+    background: #fff;
+    border-radius: 3px;
+    margin-bottom: 1em;
+}
+
+    .request sup {
+        color: #999;
+    }
+
+    .request>hgroup {
+        color: #fff;
+        background: #0088cc;
+    }
+        .request>hgroup:first-child {
+            border-radius: 3px 3px 0 0;
+        }
+
+        .request > hgroup.alt {
+            background: #0088cc;
+        }
+
+    .request>hgroup h3, .request>hgroup h4 {
+        padding: 0 0 0 1.4em;
+        line-height: 2.8em;
+        margin: 0;
+        font-size: 0.9em;
+        display: table-cell;
+    }
+
+    .request h3, .request h4, .request h5 {
+        display: inline;
+    }
+    
+    .request .dl-horizontal dt {
+        width: 120px;
+    }
+
+    .request .dl-horizontal dd {
+        margin-left: 140px;
+    }
+
+    .request>article{
+        padding: 1em 1em 0 1em;
+    }
+
+    .request h3, .request h4, .request h5 {
+        display: inline;
+    }
+
+    .mono, .type, .scope, .method, code {
+    font-family: 'source-code-pro','Panic Sans',Monaco,monospace,sans-serif;
+    font-weight: normal;
+    font-size: 1em;
+}
+
+
+    .method {
+    color: #c5feff;
+}
+
+    .method.post {
+        color: #C2D23A;
+    }
+
+    .method.put {
+        color: #FFCD00;
+    }
+
+    .method.delete {
+        color: #FA9000;
+    }
+
+    ul.params {
+    padding-left: 0px;
+}
+
+    ul.params h4 {
+        margin: 0;
+    }
+
+.property {
+    font-weight: bold;
+}
+
+dl {
+    font-size: 0.9em;
+}
+
+dt {
+    color: #666;
+}
+
+th {
+    text-align: left;
+    margin-top: 2em;
+}
+
+td,th {
+    padding: 0.3em;
+    vertical-align: top;
+}

@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="css/bootstrap.css"/>
+        <link rel="stylesheet" href="css/bootstrap-responsive.css"/>
+        <link rel="stylesheet" href="css/apidocs.css"/>
+    </head>
+    <body>
+        <script type="text/template" id="app-view-template">
+            <div class="row">
+                <nav class="sidebar span2">
+                    <div class="well well-small affix" style="padding:0;margin: 20px;">
+                        <section class="resources"/>
+                        <section class="types"/>
+                    </div>
+                </nav>
+                <div class="content span10" />
+            </div>
+        </script>
+        <script type="text/template" id="link-list-template">
+            <h4 class="nav-header"><%- title %></h4>
+            <ul class="nav nav-list">
+            <% _.each(items, function(item) { %> 
+                <li><a href="#<%= item.replace(/\s/g, '_') %>"><%- d(item) %></a></li>
+            <% }); %>
+            </ul>
+        </script>
+        <script type="text/template" id="resource-view-template">
+            <section id="<%= docId %>" class="resource">
+                <h2><%- name %></h2>
+                <%= doc(docId) %>
+                <div class="requests">
+                    <% _.each(requests, function(request){ %>
+                    <article id="<%= request.docId %>" class="request">
+                        <% _.each(request.uris, function(uri){ %>
+                        <hgroup>
+                            <h3 class="method <%= request.method %>"><%= request.method %></h3>
+                            <h3 class="uri <%=uri %>"><%=uri %></h3>
+                        </hgroup>
+                        <% }); %>
+                        <%= doc(request.docId) %>
+                        <details>
+                            <dl class="dl-horizontal details">
+                                <% if (request.parameters && request.parameters.length >0) { %>
+                                <dt><%= d("parameters") %></dd>
+                                <dd>
+                                    <ul class="params">
+                                    <% _.each(request.parameters, function(parameter) { %> 
+                                        <li>
+                                            <hgroup>
+                                                <h4 class="mono"><%= parameter.name %><sup><%= parameter.source %></sup></h4> - <%= typeLink(parameter.type) %></h4>
+                                            </hgroup>
+                                            <%= doc(parameter.docId) %>
+                                        </li>
+                                    <% }); %>
+                                    </ul>
+                                </dd>
+                                <% } %>
+                                <dt><%= d("responseType") %></dt> 
+                                <dd><%= typeLink(request.responseType) %></dd>
+                                <dt><%= d("authentication") %></dt> 
+                                <dd><%= typeLink(request.authenticationType) %></dd>
+                            </dl>
+                        </details>
+                    </article>
+                    <% }); %>
+                </div>
+            </section>
+        </script>
+        <script type="text/template" id="doc-view-template">
+            <%= html %>
+        </script>
+        <script type="text/template" id="article-view-template">
+            <h2><%- id %></h2>
+            <%= doc(id) %>
+        </script>
+        <script type="text/template" id="type-view-template">
+            <h2><%- docId %></h2>
+            <%= doc(docId) %>
+            <table class="table-striped">
+                <thead>
+                    <th><%= d("name") %></th>
+                    <th><%= d("type") %></th>
+                    <th><%= d("description") %></th>
+                </thead>
+                <tbody>
+                    <% _.each(properties, function(property) { %> 
+                    <tr>
+                        <td  class="mono property"><%= property.name %></td>
+                        <td><%= typeLink(property.type) %></td>
+                        <td width="50%">
+                            <%= doc(property.docId) %>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </script>
+        <script src="js/lib/jquery-1.9.1.js"></script>
+        <script src="js/lib/jquery.editable.min.js"></script>
+        <script src="js/lib/jquery.autogrow.js"></script>
+        <script src="js/lib/underscore.js"></script>
+        <script src="js/lib/backbone.js"></script>
+        <script src="js/lib/bootstrap.js"></script>
+        <script src="js/lib/showdown.js"></script>
+        <script src="js/lib/nestedView.js"></script>
+        <script src="js/apidocs.js"></script>
+        <script src="js/apiclient.js"></script>
+        <script src="js/apidocs.l20n.ru.js"></script>
+        <script>
+            $(function () {
+                apidocs.settings.url = (window && window.location && window.location.host == 'localhost:62931') ? 'http://localhost:59059' : '';
+                apidocs.data.load()
+                    .done(function () {
+                        return $.when((new apidocs.views.AppView).render());
+                    })
+                    .fail(function () {
+                        $('body').html('error loading data');
+                    });
+            });
+        </script>
+        loading...
+    </body>
+</html>
